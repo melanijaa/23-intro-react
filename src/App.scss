@@ -73,6 +73,7 @@ button {
   border: none;
   cursor: pointer;
   z-index: 1;
+  margin: 6px;
   &:after {
     content: '';
     position: absolute;
