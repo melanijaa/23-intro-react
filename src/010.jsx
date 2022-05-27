@@ -57,9 +57,6 @@ function App() {
                     kv.map((c, i) => <div className="kv" key={i} style={{backgroundColor:c}}>{i}</div>)
                 }
                 </div>
-
-
-
                 <button onClick={beArgumentu}>BE</button>
                 <button onClick={() => suArgumentu('labas')}>SU</button>
                 <button onClick={keistiSpalva}>Kita spalva</button>
