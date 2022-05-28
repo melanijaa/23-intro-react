@@ -1,56 +1,66 @@
 import { useState } from 'react';
 import './App.scss';
-import randColor from './Functions/randColor';
-import {v4 as uuidv4} from 'uuid';
 
 function App() {
-    const [avys, setAvys] = useState([]);
-    const newA = () => {
-        const avis = 
-        {
-            id: uuidv4(),
-            color:randColor(),
-            where: 'ganykla'
-        }
-        setAvys(a => [...a, avis]);
+    const [text, setText] = useState('');
+    const [select, setSelect] = useState('one');
+    const [cb, setCb] = useState({a: false, b: false, c: true, d: true, e: false});
+    const [radio, setRadio] = useState('a');
+    const [color, setColor] = useState('');
+
+    const inputText = e => {
+        //console.log(e.target.value)
+        //console.log('gffht'.padStart(10,0))
+        setText(e.target.value)
     }
 
-    /* avys eina i kirpyka pagal savo pozicija ganykloje
-    const go = id => {
-        setAvys(a => a.map(avis => avis.id === id ? {...avis, where: 'kirpykla'} : avis));
+    const inputColor = e => {
+        setColor(e.target.value)
     }
-    */
-   
-    // eina i kirpykla eiles tvarka
-    const go = id => {
-        setAvys(a => {
-        const avis = a.filter(av => av.id === id)[0];
-        avis.where = 'kirpykla';
-        const kitos = a.filter(av => av.id !== id);
-        return [...kitos, avis];
-        }
-        
-    )}
-    
+
+    const cbClick = c => {
+        setCb(checkBox => ({...checkBox, [c]: !checkBox[c]}));
+    }
+
     return (
     <div className='App'>
-        <header className='App-header'>
-            <div className='kvc'>
-                {
-                    avys.filter(a => a.where === 'kirpykla').map(a => <div key={a.id} className='kv' style={{background:a.color}}></div>) //be "style" butu vienos spalvos
-                }
-            </div>
-            <h1>AVYS</h1>
-            <div className='kvc'>
-                {
-                    avys.filter(a => a.where === 'ganykla').map(a => <div onClick={() => go(a.id)} key={a.id} className='kv' style={{background:a.color}}></div>) //be "style" butu vienos spalvos
-                }
-            </div>
-            <button onClick={newA}>Naujas Avinas</button>
+        <header className='App-header'  style={{background: color}}>
+        <fieldset>
+            <legend>TEXT</legend>
+                <input type="text" onChange={inputText} value={text}></input>
+        </fieldset>
+        <fieldset>
+            <legend>SELECT</legend>
+            <select value={select} onChange={e => setSelect(e.target.value)}>
+                <option value='one'>Vienas</option>
+                <option value='two'>Du</option>
+                <option value='three'>Trys</option>
+                <option value='four'>Keturi</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>CHECKBOX</legend>
+            A <input type="checkbox" onChange={() => cbClick('a')} checked={cb.a}/>
+            B <input type="checkbox" onChange={() => cbClick('b')} checked={cb.b}/>
+            C <input type="checkbox" onChange={() => cbClick('c')} checked={cb.c}/>
+            D <input type="checkbox" onChange={() => cbClick('d')} checked={cb.d}/>
+            E <input type="checkbox" onChange={() => cbClick('e')} checked={cb.e}/>
+        </fieldset>
+        <fieldset>
+            <legend>RADIO</legend>
+            A <input type="radio" name='r' value='a' onChange={e => setRadio(e.target.value)} checked={radio === 'a'}/>
+            B <input type="radio" name='r' value='b' onChange={e => setRadio(e.target.value)} checked={radio === 'b'}/>
+            C <input type="radio" name='r' value='c' onChange={e => setRadio(e.target.value)} checked={radio === 'c'}/>
+            D <input type="radio" name='r' value='d' onChange={e => setRadio(e.target.value)} checked={radio === 'd'}/>
+            E <input type="radio" name='r' value='e' onChange={e => setRadio(e.target.value)} checked={radio === 'e'}/>
+        </fieldset>
+        <fieldset>
+            <legend>COLOR</legend>
+            CHANGE COLOR <input type="color" onChange={inputColor} value='color' />
+        </fieldset>
         </header>
     </div>
     )
-    
     
 }
 
