@@ -15,7 +15,7 @@ function App() {
 
     return (
     <div className='App'>
-        <header className='App-header'  style={{background: color}}>
+        <header className='App-header'>
   
         </header>
     </div>
