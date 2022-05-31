@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-    const [createData, setCreateData] = useState(null);
+    const [createData] = useState(null); //setCreateData
 
     //create
     useEffect(() => {
