@@ -1,17 +1,32 @@
-import Create from './Components/CRUD/Create';
-import './bootstrap.css';
 import { useEffect, useState } from 'react';
+import './bootstrap.css';
+import Create from './Components/CRUD/Create';
+import List from './Components/CRUD/List';
+import { create, read } from './Functions/localStorage';
+// import './App.scss';
+
+
 
 function App() {
 
-    const [createData] = useState(null); //setCreateData
+    const [lastUpdate, setLastUpdate] = useState(Date.now());
 
-    //create
+    const [exes, setExes] = useState(null);
+
+    const [createData, setCreateData] = useState(null);
+
+    //Read
+    useEffect(() => {
+        setExes(read());
+    }, [lastUpdate]);
+
+    // Create
     useEffect(() => {
         if (null === createData) {
             return;
         }
-        // to localStorage
+        create(createData);
+        setLastUpdate(Date.now());
 
     }, [createData])
 
@@ -20,10 +35,10 @@ function App() {
             <div className="container">
                 <div className="row">
                     <div className="col-4">
-                        <Create></Create>
+                        <Create setCreateData={setCreateData}></Create>
                     </div>
                     <div className="col-8">
-                        One of three columns
+                        <List exes={exes}></List>
                     </div>
                 </div>
             </div>
