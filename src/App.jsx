@@ -1,8 +1,19 @@
 import Create from './Components/CRUD/Create';
 import './bootstrap.css';
+import { useEffect, useState } from 'react';
 
 function App() {
 
+    const [createData, setCreateData] = useState(null);
+
+    //create
+    useEffect(() => {
+        if (null === createData) {
+            return;
+        }
+        // to localStorage
+
+    }, [createData])
 
     return (
         <>
