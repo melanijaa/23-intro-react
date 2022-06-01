@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './bootstrap.css';
+import '/.crud.scss';
 import Create from './Components/CRUD/Create';
 import List from './Components/CRUD/List';
 import { create, read } from './Functions/localStorage';
