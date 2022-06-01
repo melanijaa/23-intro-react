@@ -3,7 +3,8 @@ import './bootstrap.css';
 import '/.crud.scss';
 import Create from './Components/CRUD/Create';
 import List from './Components/CRUD/List';
-import { create, read } from './Functions/localStorage';
+import { create, read, remove } from './Functions/localStorage';
+import Edit from './Components/CRUD/Edit';
 // import './App.scss';
 
 
@@ -13,8 +14,10 @@ function App() {
     const [lastUpdate, setLastUpdate] = useState(Date.now());
 
     const [exes, setExes] = useState(null);
+    const [modalData, setModalData] = useState(null);
 
     const [createData, setCreateData] = useState(null);
+    const [deleteData, setDeleteData] = useState(null);
 
     //Read
     useEffect(() => {
@@ -29,7 +32,17 @@ function App() {
         create(createData);
         setLastUpdate(Date.now());
 
-    }, [createData])
+    }, [createData]);
+
+    // Delete
+    useEffect(() => {
+        if (null === deleteData) {
+            return;
+        }
+        remove(deleteData);
+        setLastUpdate(Date.now());
+
+    }, [deleteData]);
 
     return (
         <>
@@ -39,10 +52,11 @@ function App() {
                         <Create setCreateData={setCreateData}></Create>
                     </div>
                     <div className="col-8">
-                        <List exes={exes}></List>
+                        <List exes={exes} setDeleteData={setDeleteData} setModalData={setModalData}></List>
                     </div>
                 </div>
             </div>
+            <Edit modalData={modalData} setModalData={setModalData}></Edit>
         </>
     );
 
