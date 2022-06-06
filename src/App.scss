@@ -127,3 +127,14 @@ button {
     transform: rotate(360deg);
   }
 }
+
+svg {
+  width: 30px;
+  height: 30px;
+  fill: crimson;
+}
+
+.kitas-svg:hover {
+  transform: rotate(90deg);
+}
+
